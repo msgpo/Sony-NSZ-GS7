@@ -1,0 +1,5 @@
+/* GNU ld script
+   Use the shared library, but some functions are only in
+   the static library, so try that secondarily.  */
+OUTPUT_FORMAT(elf32-littlearm)
+GROUP ( /home/adam/Desktop/nsz-gs7/arm_cross/arm-linux-gnueabi/lib/libpthread.so.0 /home/adam/Desktop/nsz-gs7/arm_cross/arm-linux-gnueabi/lib/libpthread_nonshared.a )
