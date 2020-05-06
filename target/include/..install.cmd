@@ -1,0 +1,1 @@
+cmd_/home/adam/Sony-NSZ-GS7/target/include/.install := perl scripts/headers_install.pl /home/adam/Sony-NSZ-GS7/linux/include /home/adam/Sony-NSZ-GS7/target/include arm ; perl scripts/headers_install.pl /home/adam/Sony-NSZ-GS7/linux/include /home/adam/Sony-NSZ-GS7/target/include arm ; touch /home/adam/Sony-NSZ-GS7/target/include/.install

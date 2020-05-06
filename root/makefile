@@ -13,6 +13,9 @@ dcow 			:	dcow.o dirtycow.o
 ratc			:	ratc.o
 					$(CC) -o ratc ratc.o $(LDFLAGS)
 
+zergrush		:	zergrush.o
+					$(CC) -o zergrush zergrush.o $(LDFLAGS)
+
 dicow-mem.o		:	dcow-mem.c
 					$(CC) $(CFLAGS) -c dcow-mem.c
 
@@ -25,8 +28,12 @@ dirtycow.o		:	dirtycow.c
 ratc.o			:	ratc.c
 					$(CC) $(CFLAGS) -c ratc.c
 
+zergrush.o		:	zergrush.c
+					$(CC) $(CFLAGS) -c zergrush.c
+
 clean:
 	rm *.o
 	rm dcow
 	rm dcow-mem
 	rm ratc
+	rm zergrush
