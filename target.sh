@@ -25,6 +25,8 @@ cd $PWD/linux
 rm -fr *
 git checkout -f tags/v2.6.35
 make ARCH=arm INSTALL_HDR_PATH=$TARGET_ROOT headers_install
+sed -i '/1024/a#define SSIZE_MAX   LONG_MAX' \
+       $TARGET_INC/linux/limits.h
 cd ..
 
 tar xjfv $PWD/gdb-6.6a.tar.bz2
@@ -69,6 +71,7 @@ cd $PWD/build_gdb
     --target=$TARGET \
     --host=$TARGET \
     --build=$MACHTYPE \
+    --disable-nls \
     --prefix= 
 make -j2 all
 make DESTDIR=$TARGET_ROOT install
@@ -76,14 +79,14 @@ cd ..
 
 cd $PWD/build_glibc
 ../glibc-2.12.2/configure \
-    --prefix= \
-    --build=$MACHTYPE \
-    --host=$TARGET \
     --target=$TARGET \
+    --host=$TARGET \
+    --build=$MACHTYPE \
+    --prefix= \
     --with-headers=$TARGET_INC \
-    --disable-multilib \
     --enable-kernel=2.6.35 \
     --enable-add-ons=nptl,ports \
+    --disable-multilib \
     --disable-nls
 make -j2 all
 make install_root=$TARGET_ROOT install

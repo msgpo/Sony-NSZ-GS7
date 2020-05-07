@@ -349,7 +349,7 @@ build: x86_64-redhat-linux-gnu
 target: arm-unknown-linux-gnueabi
 __EOF__
       cat >> $file << \__EOF__
-configured with: ../gcc-4.4.5/configure --target=arm-linux-gnueabi --prefix=/home/adam/Sony-NSZ-GS7/cross --build=x86_64-redhat-linux-gnu --host= --enable-languages=c,c++ --disable-multilib --disable-nls
+configured with: ../gcc-4.4.5/configure --target=arm-linux-gnueabi --host= --build=x86_64-redhat-linux-gnu --prefix=/home/adam/Sony-NSZ-GS7/cross --enable-languages=c,c++ --disable-multilib --disable-nls
 __EOF__
       cat >> $file << __EOF__
 >Description:

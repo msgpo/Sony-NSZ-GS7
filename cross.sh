@@ -78,6 +78,8 @@ cd $PWD/linux
 rm -fr *
 git checkout -f tags/v2.6.35
 make ARCH=arm INSTALL_HDR_PATH=$PREFIX/$TARGET headers_install
+sed -i '/1024/a#define SSIZE_MAX   LONG_MAX' \
+       $PREFIX/$TARGET/include/linux/limits.h 
 cd ..
 
 mkdir $PWD/build_binutils
@@ -118,10 +120,9 @@ cd ..
 cd $PWD/build_binutils
 ../binutils-2.27/configure \
     --target=$TARGET \
-    --build=$MACHTYPE \
     --host=$MARCHTYPE \
+    --build=$MACHTYPE \
     --prefix=$PREFIX \
-    --disable-multilib \
     --disable-nls
 make -j2 all
 make install
@@ -130,9 +131,9 @@ cd ..
 cd $PWD/build_gcc
 ../gcc-4.4.5/configure \
     --target=$TARGET \
-    --prefix=$PREFIX \
-    --build=$MACHTYPE \
     --host=$MACHTYPE \
+    --build=$MACHTYPE \
+    --prefix=$PREFIX \
     --enable-languages=c,c++ \
     --disable-multilib \
     --disable-nls \
@@ -143,10 +144,10 @@ cd ..
 
 cd $PWD/build_glibc
 ../glibc-2.12.2/configure \
-    --prefix=$PREFIX/$TARGET \
-    --host=$TARGET \
     --target=$TARGET \
+    --host=$TARGET \
     --build=$MACHTYPE \
+    --prefix=$PREFIX/$TARGET \
     --with-headers=$PREFIX/$TARGET/include \
     --disable-multilib \
     --enable-kernel=2.6.35 \
@@ -171,9 +172,9 @@ cp gmp-5.0.1/gmp-impl.h build_gcc/mpfr
 cd $PWD/build_gcc
 ../gcc-4.4.5/configure \
     --target=$TARGET \
-    --prefix=$PREFIX \
-    --build=$MACHTYPE \
     --host=$MARCHTYPE \
+    --build=$MACHTYPE \
+    --prefix=$PREFIX \
     --enable-languages=c,c++ \
     --disable-multilib \
     --disable-nls
@@ -187,10 +188,10 @@ rm -fr $PWD/build_glibc
 mkdir $PWD/build_glibc
 cd $PWD/build_glibc
 ../glibc-2.12.2/configure \
-    --prefix=$PREFIX/$TARGET \
-    --build=$MACHTYPE \
-    --host=$TARGET \
     --target=$TARGET \
+    --host=$TARGET \
+    --build=$MACHTYPE \
+    --prefix=$PREFIX/$TARGET \
     --with-headers=$PREFIX/$TARGET/include \
     --disable-multilib \
     --enable-kernel=2.6.35 \
@@ -210,6 +211,8 @@ cd ..
 cd $PWD/build_gdb
 ../gdb-6.6/configure \
     --target=$TARGET \
+    --host=$MARCHTYPE \
+    --build=$MARCHTYPE \
     --prefix=$PREFIX
 make -j2 all
 make install
@@ -229,6 +232,6 @@ rm -fr $PWD/mpfr-3.0.0
 rm -fr $PWD/glibc-ports-2.12.1
 rm -fr $PWD/termcap-1.3.1
 
-echo DONE!
+echo Done!
 
 
