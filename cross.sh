@@ -195,7 +195,7 @@ cd $PWD/build_glibc
     --with-headers=$PREFIX/$TARGET/include \
     --disable-multilib \
     --enable-kernel=2.6.35 \
-    --disable-nls \
+
     --enable-add-ons=nptl,ports \
     libc_cv_forced_unwind=yes \
     libc_cv_c_cleanup=yes
@@ -213,7 +213,8 @@ cd $PWD/build_gdb
     --target=$TARGET \
     --host=$MARCHTYPE \
     --build=$MARCHTYPE \
-    --prefix=$PREFIX
+    --prefix=$PREFIX \
+    --disable-nls
 make -j2 all
 make install
 cd ..
