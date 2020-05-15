@@ -1,6 +1,8 @@
 #!/bin/sh
-# builds compiler debugger and libraries for Sony NSZ-GS7
+#
+# builds cross compiler debugger and libraries for Sony NSZ-GS7
 # should be built on a older OS like Ferdora 14
+#
 set -e
 export TARGET=arm-linux-gnueabi
 export PREFIX=$PWD/cross
@@ -195,7 +197,7 @@ cd $PWD/build_glibc
     --with-headers=$PREFIX/$TARGET/include \
     --disable-multilib \
     --enable-kernel=2.6.35 \
-
+    --disable-nls \
     --enable-add-ons=nptl,ports \
     libc_cv_forced_unwind=yes \
     libc_cv_c_cleanup=yes
